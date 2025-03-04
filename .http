@@ -1,0 +1,9 @@
+POST http://localhost:3000/habits
+Content-Type: application/json
+{
+    "name": "Hacer ejercicio",
+    "userId": "12345"
+}
+
+
+GET http://localhost:3000/habits
