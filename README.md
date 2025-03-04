@@ -17,7 +17,7 @@
 ---
 
 ## 🛠️ Tecnologías utilizadas
-- **Frontend**: [Next.js](https://nextjs.org/)
+- **Frontend**: [Next.js](https://nextjs.org/) (próximamente)
 - **Backend**: [Express.js](https://expressjs.com/)
 - **Base de Datos**: [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
 - **ORM**: [Mongoose](https://mongoosejs.com/)
@@ -112,5 +112,5 @@ Este proyecto está bajo la licencia **MIT**. Puedes ver el archivo LICENSE para
 
 ---
 
-### 🚀 Desarrollado por [Tu Nombre]
+### 🚀 Desarrollado por Jorge Gómez ;)
 
