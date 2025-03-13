@@ -1,9 +1,24 @@
 POST http://localhost:3000/habits
 Content-Type: application/json
+
 {
-    "name": "Hacer ejercicio",
-    "userId": "12345"
+    "name": "Hacer Cardio",
+    "userId": "123456"
 }
 
+###
 
 GET http://localhost:3000/habits
+
+###
+
+PUT http://localhost:3000/habits/{id}
+Content-Type: application/json
+
+{
+    "progress": 5
+}
+
+###
+
+DELETE http://localhost:3000/habits/{id}
