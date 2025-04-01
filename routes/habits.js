@@ -74,17 +74,42 @@ router.patch('/:id/complete', async (req, res) => {
         }
 
         habit.lastCompleted = today;
+        habit.progress = 66; // ✅ Colocar el progreso al máximo
         await habit.save();
 
         res.json({
             message: 'Hábito marcado como hecho',
+            id: habit._id,
             streak: habit.streak,
-            lastCompleted: habit.lastCompleted
+            lastCompleted: habit.lastCompleted,
+            progress: habit.progress
         });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
+
+
+
+// 🔁 Reiniciar hábito manualmente
+router.patch('/:id/reset', async (req, res) => {
+    try {
+        const habit = await Habit.findById(req.params.id);
+        if (!habit) {
+            return res.status(404).json({ error: 'Hábito no encontrado' });
+        }
+
+        habit.streak = 0;
+        habit.lastCompleted = null;
+        habit.progress = 0;
+        await habit.save();
+
+        res.json({ message: 'Hábito reiniciado', id: habit._id });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 
 
 module.exports = router;
