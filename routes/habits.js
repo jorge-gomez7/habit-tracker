@@ -43,4 +43,48 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
+// 📌 Marcar hábito como completado (y controlar streak)
+router.patch('/:id/complete', async (req, res) => {
+    try {
+        const habit = await Habit.findById(req.params.id);
+        if (!habit) {
+            return res.status(404).json({ error: 'Hábito no encontrado' });
+        }
+
+        const today = new Date();
+        const yesterday = new Date();
+        yesterday.setDate(today.getDate() - 1);
+
+        const last = habit.lastCompleted ? new Date(habit.lastCompleted) : null;
+
+        if (last) {
+            const lastDate = last.toDateString();
+            const todayDate = today.toDateString();
+            const yesterdayDate = yesterday.toDateString();
+
+            if (lastDate === todayDate) {
+                return res.status(200).json({ message: 'Ya marcado como hecho hoy' });
+            } else if (lastDate === yesterdayDate) {
+                habit.streak += 1;
+            } else {
+                habit.streak = 1;
+            }
+        } else {
+            habit.streak = 1;
+        }
+
+        habit.lastCompleted = today;
+        await habit.save();
+
+        res.json({
+            message: 'Hábito marcado como hecho',
+            streak: habit.streak,
+            lastCompleted: habit.lastCompleted
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+
 module.exports = router;

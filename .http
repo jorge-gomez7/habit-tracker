@@ -2,7 +2,7 @@ POST http://localhost:3000/habits
 Content-Type: application/json
 
 {
-    "name": "Hacer Cardio",
+    "name": "Lavar SUV CRV",
     "userId": "123456"
 }
 
@@ -22,3 +22,29 @@ Content-Type: application/json
 ###
 
 DELETE http://localhost:3000/habits/{id}
+
+
+### registro de nuevo usuario
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "email": "jorge.agomez@outlook.com",
+    "password": "JgomezGalileo"
+}
+
+
+
+### Login de usuario
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "jorge.agomez@outlook.com",
+  "password": "JgomezGalileo"
+}
+
+
+### Marcar hábito como completado
+PATCH http://localhost:3000/habits/67eb73b8120194b8e3df5a43/complete
+
