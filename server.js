@@ -19,6 +19,11 @@ mongoose.connect(process.env.MONGO_URI, {
 const habitRoutes = require('./routes/habits');
 app.use('/habits', habitRoutes);
 
+
+const authRoutes = require('./routes/auth');
+app.use('/auth', authRoutes);
+
+
 // Ruta de prueba
 app.get('/', (req, res) => {
     res.send('API de Hábitos funcionando 🚀');
