@@ -17,7 +17,7 @@
 ---
 
 ## 🛠️ Tecnologías utilizadas
-- **Frontend**: [Next.js](https://nextjs.org/) (próximamente)
+- **Frontend**: [Next.js](https://nextjs.org/)
 - **Backend**: [Express.js](https://expressjs.com/)
 - **Base de Datos**: [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
 - **ORM**: [Mongoose](https://mongoosejs.com/)
