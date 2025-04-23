@@ -1,11 +1,19 @@
 const express = require('express');
 const Habit = require('../models/habit');
+const authMiddleware = require('../middleware/authMiddleware');
+
 const router = express.Router();
+
+// Proteger todas las rutas de hábitos
+router.use(authMiddleware);
 
 // 📌 Crear un nuevo hábito
 router.post('/', async (req, res) => {
     try {
-        const habit = new Habit(req.body);
+        const habit = new Habit({
+            ...req.body,
+            userId: req.userId
+        });
         await habit.save();
         res.status(201).json(habit);
     } catch (error) {
@@ -16,7 +24,7 @@ router.post('/', async (req, res) => {
 // 📌 Obtener todos los hábitos
 router.get('/', async (req, res) => {
     try {
-        const habits = await Habit.find();
+        const habits = await Habit.find({userId: req.userId});
         res.json(habits);
     } catch (error) {
         res.status(500).json({ error: error.message });

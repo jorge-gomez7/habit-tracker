@@ -1,5 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
 const User = require('../models/user');
 const router = express.Router();
 
@@ -42,7 +44,13 @@ router.post('/login', async (req, res) => {
             return res.status(401).json({ error: 'Contraseña incorrecta' });
         }
 
-        res.json({ message: 'Login exitoso', userId: user._id });
+        const token = jwt.sign(
+            { userId: user._id },
+            process.env.JWT_SECRET,
+            { expiresIn: '2h' }
+        );
+
+        res.json({ token });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
